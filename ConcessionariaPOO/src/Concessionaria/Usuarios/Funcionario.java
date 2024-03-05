@@ -16,4 +16,8 @@ public abstract class Funcionario extends Usuario{
         this.codigo=codigo;
         this.comissao=comissao;
     }
+
+    public List<Funcionario> getPagamentos(){
+        return pagamentos;
+    }
 }

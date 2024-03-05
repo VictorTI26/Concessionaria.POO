@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Usuario {
 
-    private final static List<Usuario> usuarios = new ArrayList<>();
+    protected final static List<Usuario> usuarios = new ArrayList<>();
     private String nome;
     private String usuario;
     private String senha;
@@ -17,6 +17,8 @@ public abstract class Usuario {
         this.usuario = usuario;
         this.senha = senha;
     }
+
+
 
     public static Usuario procurarUsuario(String usuario) {
         for(Usuario user: usuarios) {
