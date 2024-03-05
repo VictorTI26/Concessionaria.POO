@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Usuario.addUsuario(new Cliente("Victor", "victor", "123"));
         Usuario.addUsuario(new Vendedor("Carlos", "carlos", "1234", 1300, 1, 500));
-        Usuario.addUsuario(new Gerente("Enzo","enzo","12345",1500,1));
+        Usuario.addUsuario(new Gerente("Enzo", "enzo", "12345", 1500, 1));
 
         do {
             System.out.println("Bem vindo a concessionaria");
@@ -31,7 +31,8 @@ public class Main {
             }
         } while (true);
     }
-    private static void cadastroUsuario () {
+
+    private static void cadastroUsuario() {
         System.out.println("nome: ");
         String nome = sc.next();
         System.out.println("usuario: ");
@@ -43,6 +44,7 @@ public class Main {
 
         Usuario.addUsuario(cliente);
     }
+
     private static void login() {
         do {
             System.out.println("usuario: ");
@@ -55,24 +57,26 @@ public class Main {
         } while (usuarioLogado == null);
         menu();
     }
-    private static void menu(){
-        do{
+
+    private static void menu() {
+        do {
             System.out.printf("""
-                   Bem vindo
-                    """);
-            if (usuarioLogado instanceof Funcionario){
+                    1- Ver estoque
+                    2- Ver detalhes do veiculo
+                    3- Ver os meus veiculos
+                     """);
+            if (usuarioLogado instanceof Funcionario) {
                 System.out.printf("""
-                        2- Gerenciar Pagamentos
-                        3- Adicionar Pagamentos
-                        4- Procurar cliente
-                        5- Vender veiculo
+                        4- Visualizar pagamentos
+                        5- Procurar cliente
+                        6- Vender veiculo
                         """);
-            }if (usuarioLogado instanceof Gerente){
+            }
+            if (usuarioLogado instanceof Gerente) {
                 System.out.printf("""
-                        6- Cadastrar veiculo
-                        7- Remover veiculo
-                        8- Editar veiculo
-                        9- Alterar preço
+                        7- Cadastrar veiculo
+                        8- Remover veiculo
+                        9- Editar veiculo
                         10- Cadastrar usuario
                         11- Remover usuario
                         12- Editar usuario
@@ -82,19 +86,37 @@ public class Main {
                         16- Ver pagamento 
                         """);
             }
-                System.out.println("0- Logout");
+            System.out.println("0- Logout");
 
             int escolha = sc.nextInt();
 
-            switch (escolha){
+            switch (escolha) {
                 case 0 -> logout();
+                case 1 -> veiculosEstoque();
+                case 3 -> verVeiculos();
             }
-        }while (usuarioLogado!=null);
+
+            if (usuarioLogado instanceof Gerente) {
+                switch (escolha) {
+                    case 16 -> verPagamento();
+                }
+            }
+        } while (usuarioLogado != null);
     }
 
-    public static void logout(){
-        usuarioLogado=null;
+    public static void logout() {
+        usuarioLogado = null;
     }
 
+    public static void veiculosEstoque() {
+        System.out.println(Veiculo.getVeiculos());
+    }
 
+    public static void verVeiculos() {
+        System.out.println(usuarioLogado.getVeiculos().toString());
+    }
+
+    public static void verPagamento() {
+        System.out.println(((Funcionario) usuarioLogado).getPagamentos());
+    }
 }

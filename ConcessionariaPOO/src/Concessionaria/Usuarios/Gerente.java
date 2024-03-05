@@ -19,7 +19,7 @@ public class Gerente extends Funcionario{
         }
     }
     public void cadastrarVeiculo(Veiculo veiculo){
-        Veiculo.addVeiculos(veiculo);
+        Veiculo.addVeiculos(veiculo );
     }
     public void removerVeiculo(Veiculo veiculo) {
         Veiculo.removeVeiculo(veiculo);
@@ -45,5 +45,20 @@ public class Gerente extends Funcionario{
             }
         }
         return pagamentos;
+    }
+    public String verVendedores(){
+        String vendedores = "";
+        for(Usuario vendedor: usuarios){
+            if(vendedor instanceof Vendedor){
+                vendedores += vendedor.toString();
+            }
+        }
+        return vendedores;
+    }
+    public void editarUsuario(Usuario usuario){
+        
+    }
+    public void editarVeiculo(Veiculo veiculo){
+
     }
 }

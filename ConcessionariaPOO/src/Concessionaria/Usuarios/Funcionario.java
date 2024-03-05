@@ -1,11 +1,13 @@
 package Concessionaria.Usuarios;
 
+import Concessionaria.Veiculos.Veiculo;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Funcionario extends Usuario{
 
-    private final static List<Funcionario> pagamentos = new ArrayList<>();
+    private  ArrayList<Double> pagamentos = new ArrayList<>();
     private double salario;
     private int codigo;
     private double comissao;
@@ -17,7 +19,29 @@ public abstract class Funcionario extends Usuario{
         this.comissao=comissao;
     }
 
-    public List<Funcionario> getPagamentos(){
+    public ArrayList<Double> getPagamentos() {
         return pagamentos;
+    }
+
+    public void addPagamento(Double pagamento){
+        double pagamentoComissao = pagamento * this.comissao;
+        pagamentos.add(pagamentoComissao) ;
+    }
+
+    public Usuario procurarCliente(String nome){
+        return Usuario.procurarUsuario(nome);
+    }
+
+    public Boolean venderVeiculo(Veiculo veiculo, Usuario usuario){
+        if (veiculo==null){
+            return false;
+        }if (usuario==null){
+            return false;
+        }usuario.addVeiculo(veiculo);
+        return true;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 }
